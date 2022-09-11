@@ -15,4 +15,10 @@ class SolutionTest {
         assertArrayEquals(rightResult, Solution.findOneFirstPair(nums, target));
     }
 
+    @Test
+    public void findOneFirstPairWithStreamTest() {
+        int[] rightResult = new int[]{3, 7};
+        assertArrayEquals(rightResult, Solution.findOneFirstPairWithStream(nums, target));
+    }
+
 }

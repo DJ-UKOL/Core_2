@@ -1,6 +1,7 @@
 package homework.Task_02;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 /*
  * Задача №2 - на вход подается массив и число.
@@ -14,11 +15,17 @@ public class Solution {
         int[] nums = {3, 4, 2, 7};
         int target = 10;
         // Выводим массив в консоль
+        System.out.println("Version 1:");
         System.out.print(Arrays.toString(nums) + ", " + target + " -> ");
         System.out.println(Arrays.toString(findOneFirstPair(nums, target)));
+        System.out.println("Version 2:");
+        System.out.print(Arrays.toString(nums) + ", " + target + " -> ");
+        System.out.println(Arrays.toString(findOneFirstPairWithStream(nums, target)));
     }
 
     // Функция поиска пары в массиве с заданной суммой
+    // Используем метод грубой силы с вложенным циклом
+    // Сложность выполнения O(n^2 ).
     // nums - входной массив
     // target - заданная сумма
     public static int[] findOneFirstPair(int[] nums, int target)
@@ -42,4 +49,20 @@ public class Solution {
         }
         return result;
     }
+
+    public static int[] findOneFirstPairWithStream(int[] nums, int target) {
+        int[] result = new int[2];
+        // Используем IntStream.range для генерации последовательного потока чисел
+        IntStream.range(0,  nums.length)
+                .forEach(i -> IntStream.range(0,  nums.length)
+                        .filter(j -> i != j && nums[i] + nums[j] == target)
+                        .forEach(j -> {
+                            result[0]= nums[j];
+                            result[1] = nums[i];
+                        })
+                );
+
+        return result;
+    }
+
 }
